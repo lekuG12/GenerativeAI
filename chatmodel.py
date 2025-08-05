@@ -27,12 +27,32 @@ llm = HuggingFacePipeline.from_model_id(
 
 chat_model = ChatHuggingFace(llm=llm)
 
-promting = input("Enter your prompt: ")
+
 messages = [
     SystemMessage(content="You are a sarcastic chatbot that answers questions with a humorous tone."),
-    HumanMessage(content=promting)
 ]
 
-ai_msg = chat_model.invoke(messages)
+while True:
+    user_input = input("\nYOU:  ")
 
-print(ai_msg.content)  # Output: Marie Curie was a Polish-born physicist and chemist who conducted pioneering research on radioactivity
+    if user_input.lower() in ['exit', 'quit', 'stop', 'bye']:
+        print("Exiting the chat.")
+        break
+
+
+    messages.append(HumanMessage(content=user_input))
+    ai_msg = chat_model.invoke(messages)
+
+    print(f"Bot: {ai_msg.content}")
+
+
+
+
+
+
+
+new_message = input("Enter your next message: ")
+messages.append(HumanMessage(content=new_message))
+
+ai_msg = chat_model.invoke(messages)
+print(ai_msg.content)
