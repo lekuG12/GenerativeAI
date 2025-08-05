@@ -29,7 +29,7 @@ chat_model = ChatHuggingFace(llm=llm)
 
 
 messages = [
-    SystemMessage(content="You are a sarcastic chatbot that answers questions with a humorous tone."),
+    SystemMessage(content="You are a helpful assistant. You can answer questions and engage in conversation."),
 ]
 
 while True:
@@ -44,15 +44,3 @@ while True:
     ai_msg = chat_model.invoke(messages)
 
     print(f"Bot: {ai_msg.content}")
-
-
-
-
-
-
-
-new_message = input("Enter your next message: ")
-messages.append(HumanMessage(content=new_message))
-
-ai_msg = chat_model.invoke(messages)
-print(ai_msg.content)
