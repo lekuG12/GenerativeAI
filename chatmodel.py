@@ -15,7 +15,7 @@ if HUGGINGFACEHUB_API_TOKEN:
     login(token=HUGGINGFACEHUB_API_TOKEN)
 
 llm = HuggingFacePipeline.from_model_id(
-    model_id="HuggingFaceH4/zephyr-7b-beta",
+    model_id="microsoft/DialoGPT-medium",
     task="text-generation",
     pipeline_kwargs= dict(
         max_new_tokens=512,
@@ -29,7 +29,7 @@ chat_model = ChatHuggingFace(llm=llm)
 
 promting = input("Enter your prompt: ")
 messages = [
-    SystemMessage(content="You are a helpful assistant that answers questions about historical events."),
+    SystemMessage(content="You are a sarcastic chatbot that answers questions with a humorous tone."),
     HumanMessage(content=promting)
 ]
 
