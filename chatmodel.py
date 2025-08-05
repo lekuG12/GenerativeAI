@@ -1,28 +1,38 @@
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
+from langchain.schema import (
+    HumanMessage,
+    SystemMessage,
+    AIMessage,
+)
+from huggingface_hub import login
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGING_FACE_TOKEN")
 
-llm = HuggingFaceEndpoint(
-    repo_id="gpt2",
+if HUGGINGFACEHUB_API_TOKEN:
+    login(token=HUGGINGFACEHUB_API_TOKEN)
+
+llm = HuggingFacePipeline.from_model_id(
+    model_id="HuggingFaceH4/zephyr-7b-beta",
     task="text-generation",
-    max_new_tokens=512,
-    do_sample=False,
-    repetition_penalty=1.03,
-    provider="auto",  # let Hugging Face choose the best provider for you
+    pipeline_kwargs= dict(
+        max_new_tokens=512,
+        do_sample=True,
+        temperature=0.7,
+        repetition_penalty=1.2
+    )
 )
 
 chat_model = ChatHuggingFace(llm=llm)
 
+promting = input("Enter your prompt: ")
+messages = [
+    SystemMessage(content="You are a helpful assistant that answers questions about historical events."),
+    HumanMessage(content=promting)
+]
 
+ai_msg = chat_model.invoke(messages)
 
-
-# from langchain.schema import (
-#     HumanMessage,
-#     SystemMessage,
-#     AIMessage,
-# )
-
-
-# messages = [
-#     SystemMessage(content="You are a helpful assistant that answers questions about historical events."),
-#     HumanMessage(content='Who is Marie Curie?')
-# ]
+print(ai_msg.content)  # Output: Marie Curie was a Polish-born physicist and chemist who conducted pioneering research on radioactivity
