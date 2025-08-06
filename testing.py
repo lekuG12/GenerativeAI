@@ -19,7 +19,7 @@ hf = HuggingFacePipeline.from_model_id(
 template = """Question: {question}
 Answer: Let's think step by step."""
 
-prompt = PromptTemplate.from_template(template)
+prompt = PromptTemplate.from_template(template=template)
 
 chain = prompt | hf
 
