@@ -1,8 +1,8 @@
-from langchain_huggingface import HuggingFacePipeline, ChatHuggingFace
+from langchain_huggingface import HuggingFacePipeline
 from langchain_core.prompts import PromptTemplate
 
 llm = HuggingFacePipeline.from_model_id(
-    model_id="facebook/blenderbot-400M-distill",
+    model_id="gpt2",
     task="text-generation",
     pipeline_kwargs=dict(
         max_new_tokens=512,
