@@ -23,7 +23,7 @@ buffer_memory = ConversationBufferMemory()
 summary_memory = ConversationSummaryMemory(llm=llm)
 
 def run_convo(user_input):
-    summary = summary_memory.load_memory_variables({})['summary']
+    summary = summary_memory.load_memory_variables({}).get('history', '')
     buffer = buffer_memory.load_memory_variables({})['history']
 
     context = f'Current Summary: {summary}\nPast conversation: {buffer}\nUser: {user_input}\nChatbot:'
