@@ -22,7 +22,7 @@ wiki_wrapper = WikipediaAPIWrapper()
 wiki = WikipediaQueryRun(api_wrapper=wiki_wrapper)
 tools = [wiki]
 
-agent = initialize_agent(tools=tools, llm=llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+agent = initialize_agent(tools=tools, llm=llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=False)
 
 response = agent.run('Tell me about the history of the Eiffel Tower')
 print(response)
