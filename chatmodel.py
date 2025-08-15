@@ -15,7 +15,7 @@ if HUGGINGFACEHUB_API_TOKEN:
     login(token=HUGGINGFACEHUB_API_TOKEN)
 
 llm = HuggingFacePipeline.from_model_id(
-    model_id="microsoft/DialoGPT-medium",
+    model_id="facebook/blenderbot-400M-distill",
     task="text-generation",
     pipeline_kwargs= dict(
         max_new_tokens=512,

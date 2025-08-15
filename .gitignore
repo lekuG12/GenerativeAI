@@ -1,2 +1,5 @@
 /myenv
 *.env
+/.vscode
+*.png
+*.xlsx
